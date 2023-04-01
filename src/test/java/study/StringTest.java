@@ -25,7 +25,8 @@ public class StringTest {
 
 	@Test
 	void subString() {
-		String substring = "(1,2)".substring(1, 4);
+		String input = "(1,2)";
+		String substring = input.substring(1, input.length() - 1);
 		assertThat(substring).isEqualTo("1,2");
 	}
 
@@ -45,7 +46,7 @@ public class StringTest {
 	@DisplayName("charAt을 활용해 특정 위치 문자를 가져올 때, 위치 값을 벗어나면 exception을 던진다.")
 	void charAt2() {
 		assertThatExceptionOfType(IndexOutOfBoundsException.class)
-            .isThrownBy(() -> {
+			.isThrownBy(() -> {
 				String str = "abc";
 				char c = str.charAt(4);
 			}).withMessageMatching("String index out of range: \\d+");
