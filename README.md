@@ -24,3 +24,13 @@ git checkout main // 기본 브랜치가 main인 경우
 git checkout -b 브랜치이름
 ex) git checkout -b apply-feedback
 ```
+
+---
+## 기능 목록
+- 숫자 입력 기능
+- 상대 컴퓨터
+  - 임의의 다른 3개의 수를 선택 (1 ~ 9 사이)
+  - 플레이어의 입력 값에 따른 판별 결과
+- 결과 view 기능
+- 다시 시작 or 완전 종료 기능
+
