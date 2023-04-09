@@ -1,20 +1,17 @@
 package study.stringCalculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class InputParser {
 	private static final String DELIMITER = " ";
-	private static final Set<String> OPERATORS = new HashSet<>(Arrays.asList("+", "-", "/", "*"));
-	private String[] splitedString;
 	private List<Integer> numbers;
-	private List<String> operators;
+	private List<Operator> operators;
 
 	public InputParser(String input) {
-		splitInput(input);
+		String[] splitedString = input.split(DELIMITER);
+		this.numbers = extractNumbers(splitedString);
+		this.operators = extractOperators(splitedString);
 	}
 
 	public int getNextNumber() {
@@ -24,7 +21,7 @@ public class InputParser {
 		return this.numbers.remove(0);
 	}
 
-	public String getNextOperator() {
+	public Operator getNextOperator() {
 		if (this.operators.size() == 0) {
 			throw new IllegalStateException("there is no remain operator");
 		}
@@ -39,12 +36,6 @@ public class InputParser {
 		return this.operators.size() > 0;
 	}
 
-	private void splitInput(String input) {
-		this.splitedString = input.split(DELIMITER);
-		this.numbers = extractNumbers(this.splitedString);
-		this.operators = extractOperators(this.splitedString);
-	}
-
 	private List<Integer> extractNumbers(String[] inputs) {
 		List<Integer> numbers = new ArrayList<>();
 		for (String value : inputs) {
@@ -56,14 +47,13 @@ public class InputParser {
 		return numbers;
 	}
 
-	private List<String> extractOperators(String[] inputs) {
-		List<String> operators = new ArrayList<>();
+	private List<Operator> extractOperators(String[] inputs) {
+		List<Operator> operators = new ArrayList<>();
 		for (String value : inputs) {
 			parseOperator(operators, value);
 		}
 		return operators;
 	}
-
 
 	private void parseNumber(List<Integer> numbers, String str) {
 		if (isNumber(str)) {
@@ -71,21 +61,22 @@ public class InputParser {
 		}
 	}
 
-	private void parseOperator(List<String> operators, String str) {
-		if (isOperator(str)) {
-			operators.add(str);
+	private void parseOperator(List<Operator> operators, String str) {
+		Operator operator = Operator.find(str);
+		if (isNumber(str)) {
+			return;
 		}
-	}
-
-	private boolean isOperator(String str) {
-		return OPERATORS.contains(str);
+		if (operator == Operator.UNKNOWN) {
+			throw new IllegalArgumentException("invalid operator");
+		}
+		operators.add(operator);
 	}
 
 	private boolean isNumber(String str) {
 		if (str == null) {
 			return false;
 		}
-		try	{
+		try {
 			Integer.parseInt(str);
 		} catch (NumberFormatException e) {
 			return false;

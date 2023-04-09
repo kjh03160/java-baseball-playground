@@ -1,4 +1,4 @@
-package study;
+package study.stringCalculator;
 
 
 import static org.assertj.core.api.Assertions.*;
@@ -8,9 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import study.stringCalculator.Calculator;
-
-public class ArithmeticTest {
+public class CalculatorTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {
