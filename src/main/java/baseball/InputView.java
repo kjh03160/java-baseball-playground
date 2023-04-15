@@ -7,12 +7,12 @@ public class InputView {
 	private static void promptInputMessage() {
 		System.out.print(INPUT_MESSAGE);
 	}
-	public static int receiveInput() {
+	public static String receiveInput() {
 		promptInputMessage();
 		Scanner s = new Scanner(System.in);
 		String input = s.next();
 		InputValidator.checkInput(input);
-		return Integer.parseInt(input);
+		return input;
 	}
 
 
