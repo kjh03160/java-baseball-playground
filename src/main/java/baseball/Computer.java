@@ -3,8 +3,8 @@ package baseball;
 public class Computer {
 	private String selectedNumbers;
 
-	public Computer() {
-		this.selectedNumbers = selectNumbers();
+	public Computer(int digit) {
+		this.selectedNumbers = selectNumbers(digit);
 	}
 
 	public Result getResult(String input) {
@@ -27,9 +27,9 @@ public class Computer {
 		}
 	}
 
-	private String selectNumbers() {
+	private String selectNumbers(int digit) {
 		String number = String.valueOf(NumberGenerator.getRandomNumber());
-		while (number.length() < 3) {
+		while (number.length() < digit) {
 			number += NumberGenerator.getUniqueNumber(number);;
 		}
 		return number;
